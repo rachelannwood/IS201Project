@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dad Joke Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f3f3f3;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            color: #555;
+        }
+        button {
+            background-color: #ffb800;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #ffa500;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .joke-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dad Joke Generator</h1>
+    <p>Let the computer generate a joke. Guess the punchline!</p>
+    <button onclick="generateDadJoke()">Generate Joke</button>
+    <div class="joke-container">
+        <p id="jokeSetup"></p>
+        <input type="text" id="userGuess" placeholder="Enter your guess..." />
+        <button onclick="revealAnswer()">Reveal Answer</button>
+        <p id="correctAnswer"></p>
+    </div>
+
+    <script>
+        const dadJokes = [
+            { setup: "Why couldn't the T-Rex clap its hands?", answer: "Because he's dead." },
+            { setup: "How do you make a tissue dance?", answer: "You put a little boogie in it." },
+            { setup: "Why do ducks have feathers up their butts?", answer: "To cover their butt quacks!" },
+            { setup: "Me and my recliner have a special relationship because -", answer: "- we go way back!" },
+            { setup: "Why do cows have hooves instead of feet?", answer: "Because they lac-tose!" }
+        ];
+
+        let lastJokeIndex = -1; // Keeps track of the last joke shown
+
+        function generateDadJoke() {
+            let newJokeIndex;
+
+            // Ensure the new joke is not the same as the last joke
+            do {
+                newJokeIndex = Math.floor(Math.random() * dadJokes.length);
+            } while (newJokeIndex === lastJokeIndex);
+
+            lastJokeIndex = newJokeIndex; // Update the last joke index
+
+            const currentJoke = dadJokes[newJokeIndex];
+            document.getElementById("jokeSetup").innerText = `Setup: ${currentJoke.setup}`;
+            document.getElementById("correctAnswer").innerText = ""; // Clear previous answer
+            document.getElementById("userGuess").value = ""; // Clear previous guess
+        }
+
+        function revealAnswer() {
+            const currentJoke = dadJokes[lastJokeIndex];
+            document.getElementById("correctAnswer").innerText = `Correct Answer: ${currentJoke.answer}`;
+        }
+    </script>
+</body>
+</html>
+
+
+
